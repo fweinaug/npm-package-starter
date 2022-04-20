@@ -1,0 +1,26 @@
+{
+  "name": "npm-package-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint src --ext .ts,.tsx",
+    "lint:fix": "npm run lint -- --fix",
+    "prebuild": "rm -rf .build",
+    "build": "npx tsc --outDir .build",
+    "postbuild": "npm run build-package-json && cp README.md .build",
+    "build-package-json": "cat package.json | npx json -e \"delete this.scripts;delete this.devDependencies\" > .build/package.json",
+    "publish": "npm run lint && npm run build && npm publish .build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.13.0",
+    "json": "^11.0.0",
+    "typescript": "^4.6.3"
+  }
+}
